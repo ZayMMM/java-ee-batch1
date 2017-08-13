@@ -1,6 +1,6 @@
 package com.jdc.ee.test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.jdc.ee.entity.State;
+import com.jdc.ee.entity.Township;
+import com.jdc.ee.repo.StateRepository;
 import com.jdc.ee.repo.TownshipRepository;
 
 public class TownshipRepoTest {
@@ -46,7 +49,17 @@ public class TownshipRepoTest {
 	 */
 	@Test
 	public void test1() {
-		fail("Not yet implemented");
+		Township tsh = new Township();
+		tsh.setName("Mayangon");
+		
+		StateRepository stateRepo = new StateRepository(em);
+		State yangon = stateRepo.find(1);
+		
+		tsh.setState(yangon);
+		
+		repo.create(tsh);
+		
+		assertEquals(4, tsh.getId());
 	}
 
 	/**
@@ -54,7 +67,10 @@ public class TownshipRepoTest {
 	 */
 	@Test
 	public void test2() {
-		fail("Not yet implemented");
+		Township tsh = repo.find(4);
+		
+		assertEquals("Mayangon", tsh.getName());
+		assertEquals("Yangon", tsh.getState().getName());
 	}
 
 	/**
@@ -62,7 +78,12 @@ public class TownshipRepoTest {
 	 */
 	@Test
 	public void test3() {
-		fail("Not yet implemented");
+		Township tsh = repo.find(4);
+		tsh.setName("Dala");
+		
+		repo.update(tsh);
+		
+		assertEquals("Dala", repo.find(4).getName());
 	}
 
 	/**
@@ -70,6 +91,10 @@ public class TownshipRepoTest {
 	 */
 	@Test
 	public void test4() {
-		fail("Not yet implemented");
+		Township tsh = repo.find(4);
+		
+		repo.delete(tsh);
+		
+		assertNull(repo.find(4));
 	}
 }

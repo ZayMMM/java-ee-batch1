@@ -51,9 +51,7 @@ public class StateRepoTest {
 		State state = new State();
 		state.setName("Pegu");
 		
-		em.getTransaction().begin();
 		repo.create(state);
-		em.getTransaction().commit();
 		
 		assertEquals(3, state.getId());
 	}
