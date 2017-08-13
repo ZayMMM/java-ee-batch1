@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.jdc.ee.entity.State;
 import com.jdc.ee.repo.StateRepository;
 
 public class StateRepoTest {
@@ -47,7 +48,14 @@ public class StateRepoTest {
 	 */
 	@Test
 	public void test1() {
-		fail("Not yet implemented");
+		State state = new State();
+		state.setName("Pegu");
+		
+		em.getTransaction().begin();
+		repo.create(state);
+		em.getTransaction().commit();
+		
+		assertEquals(3, state.getId());
 	}
 
 	/**
@@ -55,7 +63,8 @@ public class StateRepoTest {
 	 */
 	@Test
 	public void test2() {
-		fail("Not yet implemented");
+		State state = repo.find(1);
+		assertEquals("Yangon", state.getName());
 	}
 
 	/**
@@ -63,7 +72,12 @@ public class StateRepoTest {
 	 */
 	@Test
 	public void test3() {
-		fail("Not yet implemented");
+		State state = repo.find(3);
+		state.setName("Bago");
+		
+		repo.update(state);
+		
+		assertEquals("Bago", repo.find(3).getName());
 	}
 
 	/**
@@ -71,6 +85,9 @@ public class StateRepoTest {
 	 */
 	@Test
 	public void test4() {
-		fail("Not yet implemented");
+		State state = repo.find(3);
+		repo.delete(state);
+		
+		assertNull(repo.find(3));
 	}
 }
