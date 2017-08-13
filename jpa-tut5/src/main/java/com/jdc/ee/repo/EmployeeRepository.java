@@ -10,28 +10,4 @@ public class EmployeeRepository extends AbstractRepository<Employee> {
 		super(Employee.class, em);
 	}
 
-	@Override
-	public void create(Employee t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Employee find(Object id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Employee t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Employee t) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

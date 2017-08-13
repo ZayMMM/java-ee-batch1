@@ -13,12 +13,26 @@ public abstract class AbstractRepository<T> {
 
     protected EntityManager em;
 
-    public abstract void create(T t);
+    public void create(T t) {
+		em.getTransaction().begin();
+		em.persist(t);
+		em.getTransaction().commit();
+    }
 
-    public abstract T find(Object id);
+    public T find(Object id) {
+		return em.find(type, id);
+    }
 
-    public abstract void update(T t);
+    public void update(T t) {
+		em.getTransaction().begin();
+		em.merge(t);
+		em.getTransaction().commit();
+    }
 
-    public abstract void delete(T t);
+    public void delete(T t) {
+		em.getTransaction().begin();
+		em.remove(t);
+		em.getTransaction().commit();
+    }
 
 }
