@@ -15,7 +15,7 @@ import org.junit.Test;
 import com.jdc.ee.entity.State;
 import com.jdc.ee.entity.Township;
 
-public class AddressTest {
+public class EntityManagerUsageTest {
 
 	static EntityManagerFactory emf;
 	EntityManager em;
