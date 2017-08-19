@@ -1,6 +1,8 @@
 package com.jdc.ee.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +20,6 @@ import com.jdc.ee.entity.Employee;
 import com.jdc.ee.entity.Employee.Gender;
 import com.jdc.ee.entity.State;
 import com.jdc.ee.entity.Township;
-import com.jdc.ee.repo.DepartmentRepository;
 import com.jdc.ee.repo.EmployeeRepository;
 
 public class EmployeeRepoTest {
