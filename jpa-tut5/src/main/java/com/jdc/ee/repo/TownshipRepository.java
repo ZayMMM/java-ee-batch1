@@ -7,7 +7,7 @@ import com.jdc.ee.entity.Township;
 public class TownshipRepository extends AbstractRepository<Township> {
 
 	public TownshipRepository(EntityManager em) {
-		super(Township.class, em);
+		super(em, Township.class);
 	}
 
 }

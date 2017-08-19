@@ -7,7 +7,6 @@ import com.jdc.ee.entity.Department;
 public class DepartmentRepository extends AbstractRepository<Department> {
 
 	public DepartmentRepository(EntityManager em) {
-		super(Department.class, em);
+		super(em, Department.class);
 	}
-
 }

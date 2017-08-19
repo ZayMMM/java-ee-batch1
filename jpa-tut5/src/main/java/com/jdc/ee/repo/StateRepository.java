@@ -7,6 +7,7 @@ import com.jdc.ee.entity.State;
 public class StateRepository extends AbstractRepository<State> {
 
 	public StateRepository(EntityManager em) {
-		super(State.class, em);
+		super(em, State.class);
 	}
+
 }

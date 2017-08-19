@@ -14,11 +14,10 @@ import org.junit.Test;
 
 import com.jdc.ee.entity.State;
 import com.jdc.ee.entity.Township;
-import com.jdc.ee.repo.StateRepository;
 import com.jdc.ee.repo.TownshipRepository;
 
 public class TownshipRepoTest {
-
+	
 	private static EntityManagerFactory EMF;
 	private EntityManager em;
 	private TownshipRepository repo;
@@ -26,6 +25,15 @@ public class TownshipRepoTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		EMF = Persistence.createEntityManagerFactory("jpa-tut5");
+		
+		EntityManager em = EMF.createEntityManager();
+		State state = new State();
+		state.setName("Yangon");
+		
+		em.getTransaction().begin();
+		em.persist(state);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@AfterClass
@@ -44,57 +52,45 @@ public class TownshipRepoTest {
 		em.close();
 	}
 
-	/**
-	 * Test Case for Create Method
-	 */
 	@Test
 	public void test1() {
-		Township tsh = new Township();
-		tsh.setName("Mayangon");
+		Township kamayut = new Township();
+		kamayut.setName("Kamayut");
+		State yangon = em.find(State.class, 1);
+		kamayut.setState(yangon);
 		
-		StateRepository stateRepo = new StateRepository(em);
-		State yangon = stateRepo.find(1);
+		repo.create(kamayut);
 		
-		tsh.setState(yangon);
-		
-		repo.create(tsh);
-		
-		assertEquals(4, tsh.getId());
+		assertEquals(1, kamayut.getId());
 	}
 
-	/**
-	 * Test Case for Find Method
-	 */
 	@Test
 	public void test2() {
-		Township tsh = repo.find(4);
+		Township t = repo.find(1);
 		
-		assertEquals("Mayangon", tsh.getName());
-		assertEquals("Yangon", tsh.getState().getName());
+		assertEquals("Kamayut", t.getName());
+		assertNotNull(t.getState());
+		assertEquals("Yangon", t.getState().getName());
 	}
 
-	/**
-	 * Test Case for Update Method
-	 */
 	@Test
 	public void test3() {
-		Township tsh = repo.find(4);
-		tsh.setName("Dala");
+		Township t = repo.find(1);
 		
-		repo.update(tsh);
+		t.setName("Tarmwe");
 		
-		assertEquals("Dala", repo.find(4).getName());
+		repo.update(t);
+		
+		assertEquals("Tarmwe", repo.find(1).getName());
 	}
-
-	/**
-	 * Test Case for Delete Method
-	 */
+	
 	@Test
 	public void test4() {
-		Township tsh = repo.find(4);
+		Township t = repo.find(1);
 		
-		repo.delete(tsh);
+		repo.delete(t);
 		
-		assertNull(repo.find(4));
+		assertNull(repo.find(1));
 	}
+	
 }

@@ -43,9 +43,6 @@ public class StateRepoTest {
 	}
 	
 	
-	/**
-	 * Test Case for Create Method
-	 */
 	@Test
 	public void test1() {
 		State state = new State();
@@ -53,39 +50,30 @@ public class StateRepoTest {
 		
 		repo.create(state);
 		
-		assertEquals(3, state.getId());
+		assertEquals(1, state.getId());
 	}
 
-	/**
-	 * Test Case for Find Method
-	 */
 	@Test
 	public void test2() {
 		State state = repo.find(1);
-		assertEquals("Yangon", state.getName());
+		assertEquals("Pegu", state.getName());
 	}
 
-	/**
-	 * Test Case for Update Method
-	 */
 	@Test
 	public void test3() {
-		State state = repo.find(3);
+		State state = repo.find(1);
 		state.setName("Bago");
 		
 		repo.update(state);
 		
-		assertEquals("Bago", repo.find(3).getName());
+		assertEquals("Bago", repo.find(1).getName());
 	}
 
-	/**
-	 * Test Case for Delete Method
-	 */
 	@Test
 	public void test4() {
-		State state = repo.find(3);
+		State state = repo.find(1);
 		repo.delete(state);
 		
-		assertNull(repo.find(3));
+		assertNull(repo.find(1));
 	}
 }

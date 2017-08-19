@@ -7,7 +7,7 @@ import com.jdc.ee.entity.Address;
 public class AddressRepository extends AbstractRepository<Address> {
 
 	public AddressRepository(EntityManager em) {
-		super(Address.class, em);
+		super(em, Address.class);
 	}
 
 }

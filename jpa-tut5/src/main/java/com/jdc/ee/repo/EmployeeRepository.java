@@ -7,7 +7,7 @@ import com.jdc.ee.entity.Employee;
 public class EmployeeRepository extends AbstractRepository<Employee> {
 
 	public EmployeeRepository(EntityManager em) {
-		super(Employee.class, em);
+		super(em, Employee.class);
 	}
 
 }

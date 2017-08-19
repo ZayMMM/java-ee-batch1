@@ -4,14 +4,13 @@ import javax.persistence.EntityManager;
 
 public abstract class AbstractRepository<T> {
 
-    public AbstractRepository(Class<T> type, EntityManager em) {
-    	this.type = type;
+    public AbstractRepository(EntityManager em, Class<T> type) {
     	this.em = em;
+    	this.type = type;
     }
 
-    protected Class<T> type;
-
     protected EntityManager em;
+    protected Class<T> type;
 
     public void create(T t) {
 		em.getTransaction().begin();
@@ -20,7 +19,7 @@ public abstract class AbstractRepository<T> {
     }
 
     public T find(Object id) {
-		return em.find(type, id);
+    	return em.find(type, id);
     }
 
     public void update(T t) {
@@ -31,6 +30,7 @@ public abstract class AbstractRepository<T> {
 
     public void delete(T t) {
 		em.getTransaction().begin();
+		t = em.merge(t);
 		em.remove(t);
 		em.getTransaction().commit();
     }
