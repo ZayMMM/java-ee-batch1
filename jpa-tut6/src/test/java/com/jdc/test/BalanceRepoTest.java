@@ -6,7 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,9 +22,11 @@ import org.junit.Test;
 
 import com.jdc.ee.entity.Balance;
 import com.jdc.ee.entity.Balance.Type;
+import com.jdc.ee.jpa.repo.Searchable;
 import com.jdc.ee.entity.Category;
 import com.jdc.ee.entity.Member;
 import com.jdc.ee.repo.BalanceRepo;
+import com.jdc.ee.repo.SearchBalance;
 
 public class BalanceRepoTest {
 
@@ -97,19 +101,32 @@ public class BalanceRepoTest {
 
 	@Test
 	public void test1() {
-		List<Balance> list = repo.getAll();
+		List<Balance> list = repo.find(null);
 		assertNotNull(list);
 		assertEquals(9, list.size());
 	}
 	
 	@Test
 	public void test2() {
-		assertEquals(9, repo.getAllCount());
+		assertEquals(9, repo.findCount(null));
 	}
 	
 	@Test
 	public void test3() {
-		List<Balance> list = repo.findByName("Thidar");
+		List<Balance> list = repo.find(new Searchable() {
+			
+			@Override
+			public String where() {
+				return "where t.member.name = :name";
+			}
+			
+			@Override
+			public Map<String, Object> params() {
+				Map<String, Object> params = new HashMap<>();
+				params.put("name", "Thidar");
+				return params;
+			}
+		});
 		assertNotNull(list);
 		assertEquals(3, list.size());
 	}
@@ -119,8 +136,23 @@ public class BalanceRepoTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2017, 7, 13);
 		
-		List<Balance> list = repo.findByFromDate(cal.getTime());
+		List<Balance> list = repo.find(new SearchBalance(cal.getTime(), null, null, null));
 		assertNotNull(list);
 		assertEquals(6, list.size());
 	}
+	
+	@Test
+	public void test5() {
+		
+		SearchBalance search = new SearchBalance(null, null, null, "T");
+		
+		List<Balance> list = repo.find(search);
+		
+		assertEquals(3, list.size());
+		
+		assertEquals(4, repo.find(new SearchBalance(null, null, Type.Income, null)).size());
+		
+	}
+	
+	
 }
