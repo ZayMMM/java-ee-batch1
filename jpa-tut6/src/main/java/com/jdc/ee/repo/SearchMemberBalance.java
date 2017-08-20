@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jdc.ee.entity.Balance;
-import com.jdc.ee.jpa.repo.Joinable;
-import com.jdc.ee.jpa.repo.Searchable;
-import com.jdc.ee.jpa.repo.Sortable;
+import com.jdc.jpa.repo.Joinable;
+import com.jdc.jpa.repo.Searchable;
+import com.jdc.jpa.repo.Sortable;
 
 public class SearchMemberBalance implements Searchable, Joinable, Sortable {
 

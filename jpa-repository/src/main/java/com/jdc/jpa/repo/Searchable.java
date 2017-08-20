@@ -1,4 +1,4 @@
-package com.jdc.ee.jpa.repo;
+package com.jdc.jpa.repo;
 
 import java.util.Map;
 

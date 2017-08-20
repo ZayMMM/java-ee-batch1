@@ -18,9 +18,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jdc.ee.entity.Member;
-import com.jdc.ee.jpa.repo.Searchable;
 import com.jdc.ee.repo.MemberRepo;
 import com.jdc.ee.repo.SearchMemberBalance;
+import com.jdc.jpa.repo.Searchable;
 
 public class MemberRepoTest {
 

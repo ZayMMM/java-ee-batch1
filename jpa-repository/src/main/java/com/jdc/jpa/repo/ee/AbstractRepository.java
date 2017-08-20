@@ -1,4 +1,4 @@
-package com.jdc.ee.jpa.repo;
+package com.jdc.jpa.repo.ee;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -7,41 +7,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import com.jdc.jpa.repo.Joinable;
+import com.jdc.jpa.repo.Searchable;
+import com.jdc.jpa.repo.Sortable;
+
 public abstract class AbstractRepository<T> {
 
-    public AbstractRepository(EntityManager em, Class<T> type) {
-    	this.em = em;
-    	this.type = type;
-    }
-
-    protected EntityManager em;
-    protected Class<T> type;
+    protected abstract EntityManager entityManager();
+    protected abstract Class<T> type();
 
     public void create(T t) {
-		em.getTransaction().begin();
-		em.persist(t);
-		em.getTransaction().commit();
+		entityManager().persist(t);
     }
 
     public T find(Object id) {
-    	return em.find(type, id);
+    	return entityManager().find(type(), id);
     }
 
     public void update(T t) {
-		em.getTransaction().begin();
-		em.merge(t);
-		em.getTransaction().commit();
+    	entityManager().merge(t);
     }
 
     public void delete(Object id) {
-		em.getTransaction().begin();
-		
-		String sql = String.format("delete from %s t where t.id = :id", type.getSimpleName());
-		Query query = em.createQuery(sql);
+		String sql = String.format("delete from %s t where t.id = :id", type().getSimpleName());
+		Query query = entityManager().createQuery(sql);
 		query.setParameter("id", id);
 		query.executeUpdate();
-		
-		em.getTransaction().commit();
     }
     
     public List<T> find(Searchable search) {
@@ -60,7 +51,7 @@ public abstract class AbstractRepository<T> {
     }
     
     public long findCount(Searchable search) {
-    	StringBuffer sb = new StringBuffer(String.format("select count(t) from %s t ", type.getSimpleName()));
+    	StringBuffer sb = new StringBuffer(String.format("select count(t) from %s t ", type().getSimpleName()));
     	
     	if(null != search) {
     		
@@ -72,7 +63,7 @@ public abstract class AbstractRepository<T> {
     		sb.append(search.where());
     	}
     	
-    	TypedQuery<Long> q = em.createQuery(sb.toString(), Long.class);
+    	TypedQuery<Long> q = entityManager().createQuery(sb.toString(), Long.class);
     	
     	if(null != search) {
     		for(Entry<String, Object> entry : search.params().entrySet()) {
@@ -84,7 +75,7 @@ public abstract class AbstractRepository<T> {
     }
     
     private TypedQuery<T> getQueryFromSearch(Searchable search) {
-    	StringBuffer sb = new StringBuffer(String.format("select t from %s t ", type.getSimpleName()));
+    	StringBuffer sb = new StringBuffer(String.format("select t from %s t ", type().getSimpleName()));
     	
     	if(null != search) {
     		
@@ -101,7 +92,7 @@ public abstract class AbstractRepository<T> {
     		}
     	}
 
-    	TypedQuery<T> query = em.createQuery(sb.toString(), type);
+    	TypedQuery<T> query = entityManager().createQuery(sb.toString(), type());
 
     	if(null != search) {
     		for(Entry<String, Object> entry : search.params().entrySet()) {

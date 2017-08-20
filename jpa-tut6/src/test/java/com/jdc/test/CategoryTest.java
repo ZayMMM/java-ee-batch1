@@ -17,8 +17,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jdc.ee.entity.Category;
-import com.jdc.ee.jpa.repo.Searchable;
 import com.jdc.ee.repo.CategoryRepo;
+import com.jdc.jpa.repo.Searchable;
 
 public class CategoryTest {
 	

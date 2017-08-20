@@ -22,11 +22,11 @@ import org.junit.Test;
 
 import com.jdc.ee.entity.Balance;
 import com.jdc.ee.entity.Balance.Type;
-import com.jdc.ee.jpa.repo.Searchable;
 import com.jdc.ee.entity.Category;
 import com.jdc.ee.entity.Member;
 import com.jdc.ee.repo.BalanceRepo;
 import com.jdc.ee.repo.SearchBalance;
+import com.jdc.jpa.repo.Searchable;
 
 public class BalanceRepoTest {
 
