@@ -45,61 +45,13 @@ public abstract class AbstractRepository<T> {
     }
     
     public List<T> find(Searchable search) {
-    	
-    	StringBuffer sb = new StringBuffer(String.format("select t from %s t ", type.getSimpleName()));
-    	
-    	if(null != search) {
-    		
-    		if(search instanceof Joinable) {
-    			Joinable j = (Joinable) search;
-    			sb.append(j.join());
-    		}
-    		
-    		sb.append(search.where());
-    		
-    		if(search instanceof Sortable) {
-    			Sortable s = (Sortable) search;
-    			sb.append(s.sort());
-    		}
-    	}
-    	
-    	TypedQuery<T> q = em.createQuery(sb.toString(), type);
-    	
-    	if(null != search) {
-    		for(Entry<String, Object> entry : search.params().entrySet()) {
-    			q.setParameter(entry.getKey(), entry.getValue());
-    		}
-    	}
-    	
+    	TypedQuery<T> q = getQueryFromSearch(search);
     	return q.getResultList();
     }
     
     public List<T> find(Searchable search, int start, int limit) {
-    	
-    	StringBuffer sb = new StringBuffer(String.format("select t from %s t ", type.getSimpleName()));
-    	
-    	if(null != search) {
-    		
-    		if(search instanceof Joinable) {
-    			Joinable j = (Joinable) search;
-    			sb.append(j.join());
-    		}
-    		
-    		sb.append(search.where());
-    		
-    		if(search instanceof Sortable) {
-    			Sortable s = (Sortable) search;
-    			sb.append(s.sort());
-    		}
-    	}
-    	
-    	TypedQuery<T> q = em.createQuery(sb.toString(), type);
-    	
-    	if(null != search) {
-    		for(Entry<String, Object> entry : search.params().entrySet()) {
-    			q.setParameter(entry.getKey(), entry.getValue());
-    		}
-    	}
+    	   	
+    	TypedQuery<T> q = getQueryFromSearch(search);
     	
     	q.setFirstResult(start);
     	q.setMaxResults(limit);
@@ -129,5 +81,34 @@ public abstract class AbstractRepository<T> {
     	}
     	
     	return q.getSingleResult();
+    }
+    
+    private TypedQuery<T> getQueryFromSearch(Searchable search) {
+    	StringBuffer sb = new StringBuffer(String.format("select t from %s t ", type.getSimpleName()));
+    	
+    	if(null != search) {
+    		
+    		if(search instanceof Joinable) {
+    			Joinable j = (Joinable) search;
+    			sb.append(j.join());
+    		}
+    		
+    		sb.append(search.where());
+    		
+    		if(search instanceof Sortable) {
+    			Sortable s = (Sortable) search;
+    			sb.append(s.sort());
+    		}
+    	}
+
+    	TypedQuery<T> query = em.createQuery(sb.toString(), type);
+
+    	if(null != search) {
+    		for(Entry<String, Object> entry : search.params().entrySet()) {
+    			query.setParameter(entry.getKey(), entry.getValue());
+    		}
+    	}
+
+    	return query;
     }
 }
