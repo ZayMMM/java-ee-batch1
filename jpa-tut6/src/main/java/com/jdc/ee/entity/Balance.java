@@ -19,7 +19,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="Balance.getAll", query="select c from Balance c"),
 	@NamedQuery(name="Balance.getAllCount", query="select count(c) from Balance c"),
-	@NamedQuery(name="Balance.findByName", query="select c from Balance c where c.member.name = :name")
+	@NamedQuery(name="Balance.findByName", query="select c from Balance c where c.member.name = :name"),
+	@NamedQuery(name="Balance.findByFromDate", query="select b from Balance b where b.date >= :date")
 })
 public class Balance implements Serializable {
 

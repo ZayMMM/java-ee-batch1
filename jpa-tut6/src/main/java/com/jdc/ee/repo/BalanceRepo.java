@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import com.jdc.ee.entity.Balance;
 
@@ -14,7 +15,10 @@ public class BalanceRepo extends AbstractRepository<Balance> {
 	}
 	
 	public List<Balance> findByFromDate(Date date) {
-		return null;
+		
+		TypedQuery<Balance> query = em.createNamedQuery("Balance.findByFromDate", Balance.class);
+		query.setParameter("date", date);
+		return query.getResultList();
 	}
 
 }
