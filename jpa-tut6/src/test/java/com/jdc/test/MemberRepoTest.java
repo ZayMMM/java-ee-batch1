@@ -20,6 +20,7 @@ import org.junit.Test;
 import com.jdc.ee.entity.Member;
 import com.jdc.ee.jpa.repo.Searchable;
 import com.jdc.ee.repo.MemberRepo;
+import com.jdc.ee.repo.SearchMemberBalance;
 
 public class MemberRepoTest {
 
@@ -30,6 +31,8 @@ public class MemberRepoTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		EMF = Persistence.createEntityManagerFactory("jpa-tut6");
+		
+		BalanceRepoTest.initData(EMF);
 	}
 
 	@AfterClass
@@ -78,6 +81,12 @@ public class MemberRepoTest {
 		});
 		assertEquals(1, list.size());
 		assertEquals(3, list.get(0).getId());
+	}
+	
+	@Test
+	public void test4() {
+		List<Member> list = repo.find(new SearchMemberBalance());
+		assertEquals(2, list.size());
 	}
 	
 }

@@ -38,6 +38,10 @@ public class BalanceRepoTest {
 	public static void setUpBeforeClass() throws Exception {
 		EMF = Persistence.createEntityManagerFactory("jpa-tut6");
 		
+		initData(EMF);
+	}
+	
+	public static void initData(EntityManagerFactory EMF) {
 		EntityManager em = EMF.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -65,7 +69,7 @@ public class BalanceRepoTest {
 		em.close();
 	}
 	
-	private static void createBalance(EntityManager em, Member mem, Category cat, Type type, int ammount, String date) {
+	public static void createBalance(EntityManager em, Member mem, Category cat, Type type, int ammount, String date) {
 		try {
 			Balance b = new Balance();
 			b.setMember(mem);

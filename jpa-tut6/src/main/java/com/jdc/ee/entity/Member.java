@@ -1,6 +1,7 @@
 package com.jdc.ee.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.OneToMany;
 
 @Entity
 @SuppressWarnings("serial")
@@ -24,6 +26,15 @@ public class Member implements Serializable {
 	
 	private String name;
 	
+	@OneToMany(mappedBy = "member")
+	private List<Balance> balances;
+	
+	public List<Balance> getBalances() {
+		return balances;
+	}
+	public void setBalances(List<Balance> balances) {
+		this.balances = balances;
+	}
 	public int getId() {
 		return id;
 	}
