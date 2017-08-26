@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Student Registration</title>
+</h:head> 
+<body> 
+	<h1>Student Registration</h1>
+	
+	<h:form>
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel value="Name" />
+			<h:inputText value="#{studentAddBean.student.name}" />
+		
+			<h:outputLabel value="Phone" />
+			<h:inputText value="#{studentAddBean.student.phone}" />
+	
+			<h:outputLabel value="Address" />
+			<h:inputTextarea value="#{studentAddBean.student.address}" rows="4" cols="40" />
+			
+			<h:panelGroup></h:panelGroup>
+			<h:panelGroup>
+				<button type="reset">Clear</button>
+				<h:commandButton action="#{studentAddBean.save()}" value="Save" />
+			</h:panelGroup>
+	
+		</h:panelGrid>
+	</h:form>
+
+	
+</body> 
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Student Registration</title>
+</h:head> 
+<body> 
+	<h1>Course Registration</h1>
+	
+	<h:form>
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel value="Name" />
+			<h:inputText value="#{courseAddBean.course.name}" />
+		
+			<h:outputLabel value="Duration" />
+			<h:inputText value="#{courseAddBean.course.duration}" />
+	
+			<h:outputLabel value="Fees" />
+			<h:inputText value="#{courseAddBean.course.fees}" />
+
+			<h:outputLabel value="Description" />
+			<h:inputTextarea value="#{courseAddBean.course.description}" rows="4" cols="40" />
+			
+			<h:panelGroup></h:panelGroup>
+			<h:panelGroup>
+				<button type="reset">Clear</button>
+				<h:commandButton action="#{courseAddBean.save()}" value="Save" />
+			</h:panelGroup>
+	
+		</h:panelGrid>
+	</h:form>
+	
+	
+</body> 
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Student List</title>
+</h:head> 
+<body> 
+	<h1>Student List</h1>
+	
+	<h:link outcome="/students-add" value="Add Student"/>
+	
+	<h:dataTable value="#{studentListBean.list}" var="s">
+		<h:column>
+			<f:facet name="header">ID</f:facet>
+			<h:outputText value="#{s.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Name</f:facet>
+			<h:outputText value="#{s.name}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Phone</f:facet>
+			<h:outputText value="#{s.phone}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Address</f:facet>
+			<h:outputText value="#{s.address}" />
+		</h:column>
+	</h:dataTable>
+	
+</body> 
+</html>
