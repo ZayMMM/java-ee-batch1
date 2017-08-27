@@ -22,7 +22,7 @@ public class CourseAddBean {
 	
 	public String save() {
 		service.create(course);
-		return "/courses";
+		return "/courses?faces-redirect=true";
 	}
 
 	public Course getCourse() {
