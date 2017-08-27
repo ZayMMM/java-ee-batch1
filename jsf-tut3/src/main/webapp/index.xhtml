@@ -8,6 +8,61 @@
 	<title>Friends</title>
 </h:head> 
 <body> 
-	<h1>Friends</h1>
+	<h1>Friends <h:button outcome="/friend-edit" value="Add Friend"></h:button></h1>
+	
+	<!-- Search Form -->
+	<h:form>
+		
+		<!-- Search Group -->
+		<h:outputLabel value="Group" style="margin-right:10px;" />
+		<h:selectOneMenu value="#{friendListBean.schGroup}" style="margin-right:20px;">
+			<f:selectItem itemLabel="All Group"/>
+			<f:selectItems value="#{friendListBean.groups}" 
+				var="g" itemValue="#{g}" />
+		</h:selectOneMenu>
+		
+		<!-- Search Name -->
+		<h:outputLabel value="Name" style="margin-right:10px;" />
+		<h:inputText value="#{friendListBean.schName}" style="margin-right:20px;" />
+		
+		<!-- Search Phone -->
+		<h:outputLabel value="Phone" style="margin-right:10px;" />
+		<h:inputText value="#{friendListBean.schPhone}" style="margin-right:20px;" />
+		
+		<h:commandButton action="#{friendListBean.search()}" value="Search" />
+	</h:form>
+	
+	<!-- Result Table -->
+	<h:dataTable value="#{friendListBean.friend}" var="f" style="width:100%; margin-top:20px;">
+		
+		<h:column>
+			<f:facet name="header">ID</f:facet>
+			<h:outputText value="#{f.id}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Group</f:facet>
+			<h:outputText value="#{f.group}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Name</f:facet>
+			<h:outputText value="#{f.name}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Phone</f:facet>
+			<h:outputText value="#{f.phone}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Email</f:facet>
+			<h:outputText value="#{f.email}" />
+		</h:column>
+
+	</h:dataTable>
+	
+	
+	
 </body> 
 </html>

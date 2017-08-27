@@ -16,6 +16,11 @@
   		<version>7.0</version>
   		<scope>provided</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>com.jdc.ee</groupId>
+  		<artifactId>jpa-repository</artifactId>
+  		<version>1.0</version>
+  	</dependency>
   </dependencies>
   <build>
   	<finalName>${project.artifactId}</finalName>

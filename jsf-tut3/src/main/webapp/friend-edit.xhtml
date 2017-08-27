@@ -1,0 +1,75 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Edit Friend</title>
+</h:head> 
+<body> 
+
+	<h1>Edit Friend</h1>
+	
+	<h:form>
+		
+		<h:panelGrid columns="2" style="width:90%">
+			
+			<h:outputLabel value="Name" />
+			<h:panelGroup>
+				<h:inputText id="name" value="#{friendEditBean.friend.name}"
+					p:placeholder="Enter Name"
+					required="true"
+					requiredMessage="You need to enter Friend Name!" />
+				<h:message for="name" />	
+			</h:panelGroup>
+			
+			<h:outputLabel value="Group" />
+			<h:panelGroup>
+				<h:selectOneRadio value="#{friendEditBean.friend.group}">
+					<f:selectItems value="#{friendEditBean.groups}" var="g" itemValue="#{g}" />
+				</h:selectOneRadio>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Phone" />
+			<h:panelGroup>
+				<h:inputText id="phone" value="#{friendEditBean.friend.phone}"
+					p:placeholder="Enter Phone"
+					required="true"
+					requiredMessage="Please enter phone number!" />
+				<h:message for="phone" />	
+			</h:panelGroup>
+
+			<h:outputLabel value="Email" />
+			<h:panelGroup>
+				<h:inputText value="#{friendEditBean.friend.email}"
+					p:placeholder="Enter Email" />
+			</h:panelGroup>
+
+			<h:outputLabel value="Interest" />
+			<h:panelGroup>
+				
+				<h:selectManyCheckbox converter="#{interestConverter}" value="#{friendEditBean.friend.interests}">
+					<f:selectItems value="#{friendEditBean.interests}" var="i" itemValue="#{i}" />
+				</h:selectManyCheckbox>
+				
+			</h:panelGroup>
+			
+			<h:outputLabel value="Remark" />
+			<h:panelGroup>
+				<h:inputTextarea rows="4" cols="40" value="#{friendEditBean.friend.remark}" /> 
+			</h:panelGroup>
+			
+			<h:panelGroup></h:panelGroup>
+			<h:panelGroup>
+				<button type="reset">Clear</button>
+				<h:commandButton action="#{friendEditBean.save()}" value="Save" />
+			</h:panelGroup>
+			
+		</h:panelGrid>
+	
+	</h:form>
+	
+</body> 
+</html>
