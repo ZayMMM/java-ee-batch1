@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Class Edit</title>
+</h:head> 
+<body> 
+
+	<h1>Add A new Class</h1>
+	
+	<h:form>
+		
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel value="Course" />
+			<h:selectOneMenu value="#{classAddBean.clas.course}" 
+				converter="#{courseConverter}">
+				<f:selectItems value="#{classAddBean.courses}" var="c" 
+					itemValue="#{c}" itemLabel="#{c.name}" />
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Days" />
+			<h:selectManyCheckbox value="#{classAddBean.clas.days}" converter="daysConverter">
+				<f:selectItems value="#{classAddBean.days}" var="d" itemValue="#{d}" />
+			</h:selectManyCheckbox>
+			
+			<h:outputLabel value="Times" />
+			<h:panelGroup>
+				<h:inputText value="#{classAddBean.clas.startTime}" />
+				<h:outputLabel value=" - " />
+				<h:inputText value="#{classAddBean.clas.endTime}" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Start Date" />
+			<h:inputText value="#{classAddBean.clas.startDate}" converter="dateConverter" />
+			
+			<h:outputLabel value="Description" />
+			<h:inputTextarea value="#{classAddBean.clas.remark}" rows="4" cols="40" />
+			
+			<h:panelGroup></h:panelGroup>		
+			<h:panelGroup>
+				<button type="reset">Clear</button>
+				<h:commandButton action="#{classAddBean.save()}" value="Save" />
+			</h:panelGroup>		
+
+		</h:panelGrid>
+	
+	</h:form>
+</body> 
+</html>

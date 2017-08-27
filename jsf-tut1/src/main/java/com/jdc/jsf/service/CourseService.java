@@ -24,5 +24,9 @@ public class CourseService {
 		return em.createNamedQuery("Course.findAll", Course.class)
 				.getResultList();
 	}
+	
+	public Course findById(int id) {
+		return em.find(Course.class, id);
+	}
 
 }

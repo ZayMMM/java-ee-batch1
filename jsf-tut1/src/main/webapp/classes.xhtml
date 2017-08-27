@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Class List</title>
+</h:head> 
+<body> 
+
+	<h1>Class List <h:button outcome="/class-add" value="Add New"></h:button> </h1>
+	
+	<h:dataTable value="#{classListBean.classes}" var="c">
+		
+		<h:column>
+			<f:facet name="header">
+				ID
+			</f:facet>
+			<h:outputText value="#{c.id}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				Course Name
+			</f:facet>
+			<h:outputText value="#{c.course.name}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Times
+			</f:facet>
+			<h:outputText value="#{c.startTime} - #{c.endTime}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Start Date
+			</f:facet>
+			<h:outputText value="#{c.startDate}" converter="dateConverter" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Duration
+			</f:facet>
+			<h:outputText value="#{c.course.duration}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Fees
+			</f:facet>
+			<h:outputText value="#{c.course.fees}" />
+		</h:column>
+		
+	</h:dataTable>
+</body> 
+</html>
