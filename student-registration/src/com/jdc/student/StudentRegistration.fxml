@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+
+<VBox prefHeight="600.0" prefWidth="980.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.jdc.student.StudentRegistration">
+   <children>
+      <HBox style="-fx-background-color: silver;">
+         <children>
+            <Label text="Student Upload">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#upload" text="Upload">
+                     <graphic>
+                        <SVGPath content="M1765.6,7.6c0-0.2-0.1-0.4-0.2-0.6s-0.3-0.2-0.6-0.2s-0.4,0.1-0.6,0.2s-0.2,0.3-0.2,0.6s0.1,0.4,0.2,0.6s0.3,0.2,0.6,0.2s0.4-0.1,0.6-0.2S1765.6,7.8,1765.6,7.6z M1768.8,7.6c0-0.2-0.1-0.4-0.2-0.6s-0.3-0.2-0.6-0.2s-0.4,0.1-0.6,0.2s-0.2,0.3-0.2,0.6s0.1,0.4,0.2,0.6s0.3,0.2,0.6,0.2s0.4-0.1,0.6-0.2S1768.8,7.8,1768.8,7.6z M1770.4,4.8v4c0,0.3-0.1,0.6-0.3,0.8c-0.2,0.2-0.5,0.4-0.9,0.4h-18.4c-0.3,0-0.6-0.1-0.9-0.4c-0.2-0.2-0.3-0.5-0.3-0.8v-4c0-0.3,0.1-0.6,0.3-0.9c0.2-0.2,0.5-0.4,0.9-0.4h5.3c0.2,0.5,0.5,0.8,0.9,1.2c0.4,0.3,0.9,0.4,1.4,0.4h3.2c0.5,0,1-0.1,1.4-0.4c0.4-0.3,0.7-0.7,0.9-1.2h5.3c0.3,0,0.6,0.1,0.9,0.4C1770.3,4.2,1770.4,4.5,1770.4,4.8z M1766.3-3.3c-0.1,0.3-0.4,0.5-0.7,0.5h-3.2v5.6c0,0.2-0.1,0.4-0.2,0.6s-0.3,0.2-0.6,0.2h-3.2c-0.2,0-0.4-0.1-0.6-0.2s-0.2-0.3-0.2-0.6v-5.6h-3.2c-0.3,0-0.6-0.2-0.7-0.5c-0.1-0.3-0.1-0.6,0.2-0.9l5.6-5.6c0.2-0.2,0.3-0.2,0.6-0.2s0.4,0.1,0.6,0.2l5.6,5.6C1766.4-3.9,1766.5-3.6,1766.3-3.3z" styleClass="Text5" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="Back2" />
+                        <String fx:value="Text5" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="table" prefHeight="526.0" prefWidth="767.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID">
+          	<cellValueFactory>
+          		<PropertyValueFactory property="id" />
+          	</cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="202.0" text="Name" >
+          	<cellValueFactory>
+          		<PropertyValueFactory property="name" />
+          	</cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="308.0" text="Phone" >
+          	<cellValueFactory>
+          		<PropertyValueFactory property="phone" />
+          	</cellValueFactory>
+          </TableColumn>
+        </columns>
+      </TableView>
+   </children>
+</VBox>
